@@ -1,3 +1,4 @@
+Answer 1：
 public class Test : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -73,3 +74,42 @@ public class Test : MonoBehaviour
         easeInOut
     }
 }
+
+Answer 3：
+
+private bool IsStrSpiltByList(string str, List<string> wordSet)
+    {
+        string tempStr = str;
+        if (string.IsNullOrEmpty(str) || wordSet == null || wordSet.Count < 1)
+        {
+            return false;
+        }
+        for (int i = 0; i < wordSet.Count; i++)
+        {
+            if (!string.IsNullOrEmpty(str) && str.Contains(wordSet[i]))
+            {
+                str = str.Replace(wordSet[i], "");
+                tempStr = tempStr.Replace(wordSet[i], i.ToString());
+            }
+            else
+            {
+                return false;
+            }
+        }
+        if (!string.IsNullOrEmpty(str))
+        {
+            return false;
+        }
+        char[] strArray = tempStr.ToCharArray();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < strArray.Length; i++)
+        {
+            sb.Append(wordSet[int.Parse(strArray[i].ToString())]);
+            if (i < strArray.Length - 1)
+            {
+                sb.Append(" ");
+            }
+        }
+        Debug.Log(sb.ToString());
+        return true;
+    }
