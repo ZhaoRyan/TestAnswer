@@ -74,9 +74,33 @@ public class Test : MonoBehaviour
         easeInOut
     }
 }
+Answer 2：
+private void CutAndPaste(int[,] a, int beginRow, int rowCount, int beginColumn, int columnCount, int targetBeginRow, int targetBeginColumn)
+    {
+        //越界
+        if (beginRow + rowCount > 50 || beginColumn + columnCount > 100 || targetBeginRow + rowCount > 50 || targetBeginColumn + columnCount > 100)
+        {
+            return;
+        }
+        int[,] temp = new int[rowCount, columnCount];
+        for (int i = 0; i < rowCount; i++)
+        {
+            for (int j = 0; j < columnCount; j++)
+            {
+                temp[i, j] = a[i + beginRow, j + beginColumn];
+            }
+        }
 
+        for (int i = 0; i < rowCount; i++)
+        {
+            for (int j = 0; j < columnCount; j++)
+            {
+                a[i + targetBeginRow, j + targetBeginColumn] = temp[i, j];
+            }
+        }
+    }
+    
 Answer 3：
-
 private bool IsStrSpiltByList(string str, List<string> wordSet)
     {
         string tempStr = str;
